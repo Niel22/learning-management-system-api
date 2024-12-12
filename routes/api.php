@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,5 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::apiResource('course-category', CourseCategoryController::class);
+    Route::apiResource('course', CourseController::class);
 });

@@ -10,5 +10,8 @@ class CourseCategory extends Model
         'name', 'slug','description'
     ];
 
-    // public function course(){}
+    public function course()
+    {
+        return $this->hasMany(Course::class, 'course_category_id', 'id');
+    }
 }

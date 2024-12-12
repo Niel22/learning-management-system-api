@@ -50,4 +50,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function course(){
+        return $this->hasMany(Course::class, 'instructor_id', 'id');
+    }
 }

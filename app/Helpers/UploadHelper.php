@@ -6,11 +6,11 @@ class UploadHelper{
 
     public function upload($name, $image, $directory){
 
-        $fileName = $name . '_thumbnail.'. $image->extension();
+        $fileName = $name . time() . '_thumbnail.'. $image->extension();
 
-        $image->move(public_path($directory), $fileName);
+        $image->storeAs($directory, $fileName, 'public');
 
-        $path = $directory.'/'. $fileName;
+        $path = 'storage/' . $directory . $fileName;
 
         return $path;
     }
