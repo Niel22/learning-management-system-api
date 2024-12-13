@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CourseCategoryController;
+use App\Http\Controllers\Admin\LessonController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -17,4 +18,5 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::apiResource('course-category', CourseCategoryController::class);
     Route::apiResource('course', CourseController::class);
+    Route::apiResource('lesson', LessonController::class);
 });

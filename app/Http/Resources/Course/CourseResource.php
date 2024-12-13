@@ -20,7 +20,16 @@ class CourseResource extends JsonResource
             'description' => $this->description,
             'Thumbnail' => url($this->thumbnail),
             'instructor' => $this->instructor->name,
-            'category' => $this->category->name
+            'category' => $this->category->name,
+            'lessons' => $this->lessons->map(function($lesson, $index){
+                return [
+                    'id' => $lesson->id,
+                    'title' => $lesson->title,
+                    'slug' => $lesson->slug,
+                    'order' => 'Lesson '. $lesson->order,
+                    'duration' => $lesson->duration . ' Minutes'
+                ];
+            }),
         ];
     }
 }
