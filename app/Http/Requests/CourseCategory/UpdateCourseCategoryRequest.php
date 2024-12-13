@@ -11,7 +11,7 @@ class UpdateCourseCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,10 @@ class UpdateCourseCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('course-category');
         return [
-            //
+            'name' => ['required', 'string', 'unique:course_categories,name,'. $id],
+            'description' => ['required', 'min:25'],
         ];
     }
 }

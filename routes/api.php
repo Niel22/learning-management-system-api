@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\CourseCategoryController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CourseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\CourseCategoryController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();

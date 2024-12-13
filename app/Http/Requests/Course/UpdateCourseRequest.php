@@ -11,7 +11,7 @@ class UpdateCourseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['nullable', 'string'],
+            'description' => ['nullable', 'min:30'],
+            'thumbnail' => ['nullable', 'mimes:png,jpg,jpeg'],
+            'course_category_id' => ['nullable', 'integer', 'exists:course_categories,id']
         ];
     }
 }

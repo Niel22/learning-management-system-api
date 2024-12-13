@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Trait\ApiResponse;
+use App\Action\Course\DeleteCourse;
+use App\Action\Course\UpdateCourse;
+use App\Http\Controllers\Controller;
 use App\Action\CourseCategory\CreateCategory;
+use App\Action\CourseCategory\DeleteCategory;
 use App\Action\CourseCategory\FetchAllCategory;
 use App\Action\CourseCategory\FetchSingleCategory;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CourseCategory\CreateCourseCategoryRequest;
-use App\Http\Resources\CourseCategory\CourseCategoryCollection;
 use App\Http\Resources\CourseCategory\CourseCategoryResource;
-use App\Trait\ApiResponse;
+use App\Http\Resources\CourseCategory\CourseCategoryCollection;
+use App\Http\Requests\CourseCategory\CreateCourseCategoryRequest;
+use App\Http\Requests\CourseCategory\UpdateCourseCategoryRequest;
 
 class CourseCategoryController extends Controller
 {
@@ -40,5 +44,22 @@ class CourseCategoryController extends Controller
         }
 
         return $this->error('Cannot Create Course Caegory');
+    }
+
+    public function update($id, UpdateCourseCategoryRequest $request, UpdateCourse $action){
+        if($action->execute($id, $request->all())){
+            return $this->success([], 'Course Updated');
+        }
+
+        return $this->error('Cannot Update Course');
+    }
+
+    public function destroy($id, DeleteCategory $action)
+    {
+        if($action->execute($id)){
+            return $this->success([], 'Course Deleted');
+        }
+
+        return $this->error('Cannot Delete Course');
     }
 }
