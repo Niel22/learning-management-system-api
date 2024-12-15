@@ -8,7 +8,7 @@ class FetchAllCategory{
 
     public function execute(){
 
-        $category = CourseCategory::paginate(10);
+        $category = CourseCategory::with('course')->paginate(10);
 
         if($category->isNotEmpty()){
             return $category;
