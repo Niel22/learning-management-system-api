@@ -9,6 +9,7 @@ class Content extends Model
     protected $fillable = [
         'lesson_id',
         'title',
+        'slug',
         'type',
         'file'
     ];

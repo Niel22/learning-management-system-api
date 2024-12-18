@@ -4,11 +4,11 @@ namespace App\Helpers;
 
 class UploadHelper{
 
-    public function upload($name, $image, $directory){
+    public function upload($name, $file, $directory){
 
-        $fileName = $name . time() . '_thumbnail.'. $image->extension();
+        $fileName = $name . time() . $file->extension();
 
-        $image->storeAs($directory, $fileName, 'public');
+        $file->storeAs($directory, $fileName, 'public');
 
         $path = 'storage/' . $directory . $fileName;
 
@@ -17,10 +17,10 @@ class UploadHelper{
 
     public function remove($filePath){
 
-        $imagePath = public_path($filePath);
+        $file_Path = public_path($filePath);
 
-        if(file_exists($imagePath)){
-            unlink($imagePath);
+        if(file_exists($file_Path)){
+            unlink($file_Path);
         }
 
     }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Lesson::class);
             $table->string('title');
+            $table->string('slug');
             $table->string('type')->comment('pdf, videos');
             $table->string('file');
             $table->timestamps();

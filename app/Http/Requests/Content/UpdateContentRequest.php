@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Content;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateContentRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateContentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,12 @@ class UpdateContentRequest extends FormRequest
      */
     public function rules(): array
     {
+        $type = ['pdf', 'video', 'docx', 'pptx', 'xls'];
         return [
-            //
+            'lesson_id' => ['nullable', 'integer', 'exists:lessons,id'],
+            'title' => ['nullable', 'string'],
+            'type' => ['nullable', Rule::in($type)],
+            'file' => ['nullable']
         ];
     }
 }

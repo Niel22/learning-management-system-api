@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Content;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateContentRequest extends FormRequest
@@ -11,7 +12,7 @@ class CreateContentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,12 +22,12 @@ class CreateContentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $type = ['pdf', 'video'];
+        $type = ['pdf', 'video', 'docx', 'pptx', 'xls'];
         return [
-            'lesson_id' => ['required', 'integer', 'exists:lesson,id'],
-            'title' => ['required','string'],
-            'type' => ['required', 'in_array:'. $type],
-            'file' => ['required' ]
+            'lesson_id' => ['required', 'integer', 'exists:lessons,id'],
+            'title' => ['required', 'string'],
+            'type' => ['required', Rule::in($type)],
+            'file' => ['required']
         ];
     }
 }

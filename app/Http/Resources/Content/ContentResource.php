@@ -14,6 +14,13 @@ class ContentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'lesson title' => $this->lesson->title,
+            'id' => $this->id,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'type' => $this->type,
+            'file' => url($this->file), 
+        ];
     }
 }
