@@ -6,8 +6,8 @@ use App\Models\Lesson;
 
 class FetchSingleLesson{
 
-    public function execute($id){
-        $lesson = Lesson::with('course')->find($id);
+    public function execute($courseId, $id){
+        $lesson = Lesson::with('course')->where('course_id', $courseId)->find($id);
 
         if(!empty($lesson)){
             return $lesson;

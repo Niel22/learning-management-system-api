@@ -6,8 +6,8 @@ use App\Models\Lesson;
 
 class FetchAllLesson{
 
-    public function execute(){
-        $lessons = Lesson::with('course')->paginate(10);
+    public function execute($courseId){
+        $lessons = Lesson::with('course', 'content')->where('course_id', $courseId)->paginate(10);
 
         if($lessons->isNotEmpty()){
             return $lessons;

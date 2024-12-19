@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Lesson;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\Content\ContentResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class LessonResource extends JsonResource
@@ -20,7 +21,7 @@ class LessonResource extends JsonResource
             'slug' => $this->slug,
             'order' => 'Lesson '. $this->order,
             'duration' => $this->duration . ' Minutes',
-            'course' => $this->course->title
+            'course' => $this->course->title,
         ];
     }
 }

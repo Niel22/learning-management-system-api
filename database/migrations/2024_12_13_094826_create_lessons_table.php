@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->foreignIdFor(Course::class);
+            $table->foreignIdFor(Course::class)->constrained()->onDelete('cascade');
             $table->integer('order')->comment('Order by which the lesson goes for eacmple lesson 1 should have order = 1.');
             $table->integer('duration')->comment('in minute');
             $table->unique(['course_id', 'order']);

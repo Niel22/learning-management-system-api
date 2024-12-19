@@ -24,10 +24,9 @@ class CreateLessonRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'course_id' => ['required', 'integer', 'exists:courses,id'],
             'order' => ['required', 'integer',
                 Rule::unique('lessons', 'order')->where(function($q){
-                    $q->where('course_id', Request('course_id'));
+                    $q->where('course_id', $this->route('course'));
                 })
             ],
             'duration' => ['required', 'integer']

@@ -2,18 +2,24 @@
 
 namespace App\Action\Lesson;
 
+use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Support\Str;
 
 class CreateLesson{
 
-    public function execute($request){
+    public function execute($courseId, $request){
 
         $request['slug'] = Str::slug($request['title']);
-        $lesson = Lesson::create($request);
+        $course = Course::find($courseId);
 
-        if($lesson){
-            return true;
+        if(!empty($course)){
+
+            $lesson = $course->lessons()->create($request);
+            
+            if($lesson){
+                return true;
+            }
         }
 
         return false;

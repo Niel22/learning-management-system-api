@@ -19,42 +19,42 @@ class LessonController extends Controller
 {
     use ApiResponse;
 
-    public function index(FetchAllLesson $action){
+    public function index($courseId, FetchAllLesson $action){
 
-        if($lesson = $action->execute()){
+        if($lesson = $action->execute($courseId)){
             return $this->success(new LessonCollection($lesson));
         }
 
         return $this->error('No Lesson Found');
     }
 
-    public function store(CreateLessonRequest $request, CreateLesson $action){
-        if($action->execute($request->all())){
+    public function store($courseId, CreateLessonRequest $request, CreateLesson $action){
+        if($action->execute($courseId, $request->all())){
             return $this->success([], 'Lesson Created');
         }
 
         return $this->error('Cannot Create Lesson');
     }
 
-    public function show($id, FetchSingleLesson $action){
+    public function show($courseId, $id, FetchSingleLesson $action){
 
-        if($lesson = $action->execute($id)){
+        if($lesson = $action->execute($courseId, $id)){
             return $this->success(new LessonResource($lesson));
         }
 
         return $this->error('Lesson not Found');
     }
 
-    public function update($id, UpdateLessonRequest $request, UpdateLesson $action){
-        if($action->execute($id, $request->all())){
+    public function update($courseId, $id, UpdateLessonRequest $request, UpdateLesson $action){
+        if($action->execute($courseId, $id, $request->all())){
             return $this->success([], 'Lesson Updated');
         }
 
         return $this->error('Cannot Update Lesson');
     }
 
-    public function destroy($id, DeleteLesson $action){
-        if($action->execute($id)){
+    public function destroy($courseId, $id, DeleteLesson $action){
+        if($action->execute($courseId, $id)){
             return $this->success([], 'Lesson Deleted');
         }
 

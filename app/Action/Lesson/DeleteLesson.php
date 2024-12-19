@@ -6,8 +6,8 @@ use App\Models\Lesson;
 
 class DeleteLesson{
 
-    public function execute($id){
-        $lesson = Lesson::find($id);
+    public function execute($courseId, $id){
+        $lesson = Lesson::where('course_id', $courseId)->where('id', $id)->first();
 
         if(!empty($lesson)){
             return $lesson->delete();

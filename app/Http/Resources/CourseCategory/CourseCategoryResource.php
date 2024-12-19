@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\CourseCategory;
 
+use App\Http\Resources\Course\CourseResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +19,7 @@ class CourseCategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'description' => $this->description
+            'description' => $this->description,
         ];
     }
 }

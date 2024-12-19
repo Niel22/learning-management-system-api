@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class, 'instructor_id');
+            $table->foreignIdFor(User::class, 'instructor_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('slug');
             $table->text('description');
             $table->string('thumbnail');
-            $table->foreignIdFor(CourseCategory::class);
+            $table->foreignIdFor(CourseCategory::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
