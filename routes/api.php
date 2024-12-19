@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\CourseCategoryController;
+use App\Http\Controllers\EnrollmentController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -21,4 +22,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('course', CourseController::class);
     Route::apiResource('lesson', LessonController::class);
     Route::apiResource('content', ContentController::class);
+    Route::apiResource('enrollment', EnrollmentController::class);
 });
