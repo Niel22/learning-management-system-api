@@ -3,16 +3,20 @@
 namespace App\Action\Enrollment;
 
 use App\Models\Enrollment;
+use App\Helpers\ModelFinder;
+use Illuminate\Support\Facades\Auth;
 
 class FetchSingleEnrollment
 {
-    public function execute($id)
+    public function execute($studentId, $id)
     {
-        $enrollment = Enrollment::with('course', 'student')->find($id);
+        if (Auth::id() == $studentId) {
 
-        if(!empty($enrollment))
-        {
-            return $enrollment;
+            $enrollment = ModelFinder::findBySlugOrId($id, new Enrollment(), 'student_id', $studentId);
+
+            if (!empty($enrollment)) {
+                return $enrollment;
+            }
         }
 
         return false;

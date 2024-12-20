@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Content;
+namespace App\Http\Requests\Enrollment;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateContentRequest extends FormRequest
+class CompleteEnrollmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +21,8 @@ class CreateContentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $type = ['pdf', 'video', 'docx', 'pptx', 'xls'];
         return [
-            'title' => ['required', 'string'],
-            'type' => ['required', Rule::in($type)],
-            'file' => ['required']
+            'status' => ['required', 'string']
         ];
     }
 }

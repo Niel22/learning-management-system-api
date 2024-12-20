@@ -19,9 +19,9 @@ class ContentController extends Controller
 {
     use ApiResponse;
 
-    public function index(FetchAllContent $action)
+    public function index($lessonId, FetchAllContent $action)
     {
-        if($content = $action->execute())
+        if($content = $action->execute($lessonId))
         {
             return $this->success(new ContentCollection($content));
         }
@@ -29,18 +29,18 @@ class ContentController extends Controller
         return $this->error('No Content Found');
     }
 
-    public function store(CreateContentRequest $request, CreateContent $action){
+    public function store($lessonId, CreateContentRequest $request, CreateContent $action){
 
-        if($action->execute($request->all())){
+        if($action->execute($lessonId, $request->all())){
             return $this->success([], 'Content Created');
         }
 
         return $this->error('Cannot create content for this lesson');
     }
 
-    public function show($id, FetchSingleContent $action)
+    public function show($lessonId, $id, FetchSingleContent $action)
     {
-        if($content = $action->execute($id))
+        if($content = $action->execute($lessonId, $id))
         {
             return $this->success(new ContentResource($content));
         }
@@ -48,9 +48,9 @@ class ContentController extends Controller
         return $this->error('Content Not found');
     }
 
-    public function update($id, UpdateContentRequest $request, UpdateContent $action)
+    public function update($lessonId, $id, UpdateContentRequest $request, UpdateContent $action)
     {
-        if($action->execute($id, $request->all()))
+        if($action->execute($lessonId, $id, $request->all()))
         {
             return $this->success([], 'Content Updated');
         }
@@ -58,9 +58,9 @@ class ContentController extends Controller
         return $this->error('Cannot update content');
     }
 
-    public function destroy($id, DeleteContent $action)
+    public function destroy($lessonId, $id, DeleteContent $action)
     {
-        if($action->execute($id))
+        if($action->execute($lessonId, $id))
         {
             return $this->success([], 'Content Delete');
         }

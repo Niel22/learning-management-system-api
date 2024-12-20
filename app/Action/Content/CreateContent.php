@@ -15,9 +15,10 @@ class CreateContent{
         $this->action = $action;
     }
 
-    public function execute($request){
+    public function execute($lessonId, $request){
 
-        $lesson = Lesson::find($request['lesson_id']);
+        $lesson = Lesson::find($lessonId);
+
         
         if(!empty($lesson)){
             

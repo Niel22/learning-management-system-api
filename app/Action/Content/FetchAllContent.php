@@ -6,9 +6,9 @@ use App\Models\Content;
 
 class FetchAllContent{
 
-    public function execute(){
+    public function execute($lessonId){
 
-        $content = Content::with('lesson')->paginate(10);
+        $content = Content::with('lesson')->where('lesson_id', $lessonId)->paginate(10);
 
         if($content->isNotEmpty()){
             return $content;
