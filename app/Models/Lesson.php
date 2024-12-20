@@ -21,4 +21,9 @@ class Lesson extends Model
     public function content(){
         return $this->hasMany(Content::class);
     }
+
+    public function progress()
+    {
+        return $this->hasMany(LessonProgress::class);
+    }
 }

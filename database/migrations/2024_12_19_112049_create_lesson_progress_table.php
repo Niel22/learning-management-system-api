@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Course;
+use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,7 +18,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'student_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(Course::class)->constrained()->onDelete('cascade');
-            $table->float('progress');
+            $table->foreignIdFor(Lesson::class)->constrained()->onDelete('cascade');
+            $table->integer('progress')->default(0);
             $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });

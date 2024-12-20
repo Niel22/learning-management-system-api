@@ -9,6 +9,7 @@ class LessonProgress extends Model
     protected $fillable = [
         'student_id',
         'course_id',
+        'lesson_id',
         'progress',
         'is_completed'
     ];
@@ -21,5 +22,10 @@ class LessonProgress extends Model
     public function student()
     {
         return $this->belongsTo(User::class, 'student_id');
+    }
+
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class, 'lesson_id');
     }
 }
