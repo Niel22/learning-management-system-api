@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Action\Enrollment\CreateEnrollment;
-use App\Action\Enrollment\DeleteEnrollment;
-use App\Action\Enrollment\FetchAllEnrollment;
-use App\Action\Enrollment\FetchSingleEnrollment;
-use App\Action\Enrollment\UpdateEnrollment;
-use App\Http\Requests\Enrollment\CompleteEnrollmentRequest;
-use App\Http\Requests\Enrollment\EnrollmentRequest;
-use App\Http\Resources\Enrollment\EnrollmentCollection;
-use App\Http\Resources\Enrollment\EnrollmentResource;
 use App\Trait\ApiResponse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Action\Enrollment\CreateEnrollment;
+use App\Action\Enrollment\DeleteEnrollment;
+use App\Action\Enrollment\UpdateEnrollment;
+use App\Action\Enrollment\FetchAllEnrollment;
+use App\Action\Enrollment\FetchSingleEnrollment;
+use App\Http\Requests\Enrollment\EnrollmentRequest;
+use App\Http\Resources\Enrollment\EnrollmentResource;
+use App\Http\Resources\Enrollment\EnrollmentCollection;
+use App\Http\Requests\Enrollment\CompleteEnrollmentRequest;
 
 class EnrollmentController extends Controller
 {

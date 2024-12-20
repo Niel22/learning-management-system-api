@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Trait\ApiResponse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Action\LessonProgress\FetchLessonProgress;
 use App\Action\LessonProgress\TrackLessonProgress;
 use App\Http\Resources\LessonProgress\LessonProgressResource;

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\CourseCategoryController;
+use App\Http\Controllers\CourseProgressController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\LessonProgressController;
 
@@ -25,4 +26,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('lesson.content', ContentController::class);
     Route::apiResource('student.enrollment', EnrollmentController::class);
     Route::apiResource('student.course.lesson.progress', LessonProgressController::class)->only('index', 'store');
+    Route::apiResource('student.course.progress', CourseProgressController::class)->only('index', 'store');
 });

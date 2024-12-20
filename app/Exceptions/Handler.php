@@ -4,8 +4,9 @@ namespace App\Exceptions;
 
 use Throwable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionsHandler;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionsHandler;
 
 class Handler extends ExceptionsHandler
 {
@@ -15,7 +16,7 @@ class Handler extends ExceptionsHandler
             return response()->json(["data" => $e->getMessage()], 400);
         }
 
-        if ($e instanceof ModelNotFoundException) {
+        if ($e instanceof BindingResolutionException) {
             return response()->json(["data" => $e->getMessage()], 400);
         }
         return parent::render($request, $e);
