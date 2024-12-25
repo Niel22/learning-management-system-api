@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Progress;
 
+use App\Models\User;
+use App\Models\Course\Course;
 use Illuminate\Database\Eloquent\Model;
 
 class CourseProgress extends Model

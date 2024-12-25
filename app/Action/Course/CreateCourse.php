@@ -4,7 +4,6 @@ namespace App\Action\Course;
 
 use Illuminate\Support\Str;
 use App\Helpers\UploadHelper;
-use App\Models\Course;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 

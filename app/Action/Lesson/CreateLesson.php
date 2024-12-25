@@ -2,9 +2,8 @@
 
 namespace App\Action\Lesson;
 
-use App\Models\Course;
-use App\Models\Lesson;
 use Illuminate\Support\Str;
+use App\Models\Course\Course;
 
 class CreateLesson{
 

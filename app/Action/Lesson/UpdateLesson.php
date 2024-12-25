@@ -2,8 +2,8 @@
 
 namespace App\Action\Lesson;
 
-use App\Models\Lesson;
 use Illuminate\Support\Str;
+use App\Models\Course\Lesson;
 
 class UpdateLesson{
 
@@ -11,6 +11,7 @@ class UpdateLesson{
         $lesson = Lesson::where('course_id', $courseId)->where('id', $id)->first();
 
         $request['slug'] = Str::slug($request['title']);
+        
         if(!empty($lesson)){
             return $lesson->update($request);
         }

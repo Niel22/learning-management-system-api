@@ -2,13 +2,12 @@
 
 namespace App\Action\LessonProgress;
 
-use App\Action\CourseProgress\TrackCourseProgress;
-use App\Models\User;
-use App\Models\Content;
-use App\Models\Course;
-use App\Models\Lesson;
-use App\Models\LessonProgress;
+use App\Models\Course\Course;
+use App\Models\Course\Lesson;
+use App\Models\Course\Content;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Progress\LessonProgress;
+use App\Action\CourseProgress\TrackCourseProgress;
 
 class TrackLessonProgress
 {
@@ -39,9 +38,9 @@ class TrackLessonProgress
                     $progress->is_completed = true;
                     $progress->save();
 
+                    return true;
                 }
 
-                return true;
             } 
 
             

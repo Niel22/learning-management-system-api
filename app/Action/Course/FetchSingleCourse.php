@@ -2,8 +2,8 @@
 
 namespace App\Action\Course;
 
-use App\Models\Course;
 use App\Helpers\ModelFinder;
+use App\Models\Course\Course;
 
 class FetchSingleCourse{
 

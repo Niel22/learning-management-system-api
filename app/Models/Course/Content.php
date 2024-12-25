@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Course;
 
+use App\Models\Course\Lesson;
 use Illuminate\Database\Eloquent\Model;
 
 class Content extends Model

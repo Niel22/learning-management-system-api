@@ -2,7 +2,9 @@
 
 namespace App\Action\Lesson;
 
-use App\Models\Lesson;
+use App\Models\Course\Lesson;
+
+
 
 class DeleteLesson{
 

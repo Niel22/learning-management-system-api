@@ -2,9 +2,9 @@
 
 namespace App\Action\Content;
 
-use App\Models\Lesson;
 use Illuminate\Support\Str;
 use App\Helpers\UploadHelper;
+use App\Models\Course\Lesson;
 
 class CreateContent{
 

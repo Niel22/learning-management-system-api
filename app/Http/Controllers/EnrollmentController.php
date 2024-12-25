@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Trait\ApiResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Action\Enrollment\CreateEnrollment;
 use App\Action\Enrollment\DeleteEnrollment;

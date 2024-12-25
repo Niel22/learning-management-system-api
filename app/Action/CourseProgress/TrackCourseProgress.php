@@ -2,11 +2,11 @@
 
 namespace App\Action\CourseProgress;
 
-use App\Models\Course;
-use App\Models\CourseProgress;
-use App\Models\Lesson;
-use App\Models\LessonProgress;
+use App\Models\Course\Course;
+use App\Models\Course\Lesson;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Progress\CourseProgress;
+use App\Models\Progress\LessonProgress;
 
 class TrackCourseProgress
 {

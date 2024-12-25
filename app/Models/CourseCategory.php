@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Course\Course;
 use Illuminate\Database\Eloquent\Model;
 
 class CourseCategory extends Model

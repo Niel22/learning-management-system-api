@@ -2,9 +2,9 @@
 
 namespace App\Action\Course;
 
-use App\Models\Course;
 use Illuminate\Support\Str;
 use App\Helpers\UploadHelper;
+use App\Models\Course\Course;
 
 class UpdateCourse
 {

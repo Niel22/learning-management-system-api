@@ -2,7 +2,9 @@
 
 namespace App\Action\LessonProgress;
 
-use App\Models\LessonProgress;
+use App\Models\Progress\LessonProgress;
+
+
 
 class FetchLessonProgress
 {

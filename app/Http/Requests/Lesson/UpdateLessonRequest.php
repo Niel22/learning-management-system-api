@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Lesson;
 
+use App\Models\Course\Lesson;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,7 +28,22 @@ class UpdateLessonRequest extends FormRequest
             'order' => ['required', 'integer',
                 Rule::unique('lessons', 'order')->where(function($q){
                     $q->where('course_id', $this->route('course'));
-                })->ignore($this->route('lesson'))
+                })->ignore($this->route('lesson')),
+                function ($attribute, $value, $fail) {
+                    $courseId = $this->route('course');
+
+                    if ($value > 1) {
+
+                        $previousOrder = $value - 1;
+                        $exists = Lesson::where('course_id', $courseId)
+                            ->where('order', $previousOrder)
+                            ->exists();
+
+                        if (!$exists) {
+                            $fail("The lesson with order {$previousOrder} must exist before creating this lesson.");
+                        }
+                    }
+                }
             ],
             'duration' => ['required', 'integer']
         ];

@@ -2,9 +2,9 @@
 
 namespace App\Action\Content;
 
-use App\Models\Content;
 use Illuminate\Support\Str;
 use App\Helpers\UploadHelper;
+use App\Models\Course\Content;
 
 class UpdateContent
 {
@@ -16,9 +16,11 @@ class UpdateContent
         $this->action = $action;
     }
 
-    public function execute($id, $request)
+    public function execute($lessonId, $id, $request)
     {
-        $content = Content::find($id);
+        $content = Content::where('lesson_id', $lessonId)
+                            ->where('id', $id)
+                            ->first();
 
         if(!empty($content))
         {

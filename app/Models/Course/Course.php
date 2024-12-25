@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Course;
 
+use App\Models\User;
+use App\Models\Course\Lesson;
+use App\Models\CourseCategory;
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model

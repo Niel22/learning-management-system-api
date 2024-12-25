@@ -2,7 +2,9 @@
 
 namespace App\Action\Content;
 
-use App\Models\Content;
+use App\Models\Course\Content;
+
+
 
 class FetchAllContent{
 

@@ -2,12 +2,14 @@
 
 namespace App\Action\Lesson;
 
-use App\Models\Lesson;
+use App\Models\Course\Lesson;
+
+
 
 class FetchAllLesson{
 
     public function execute($courseId){
-        $lessons = Lesson::with('course', 'content')->where('course_id', $courseId)->paginate(10);
+        $lessons = Lesson::with('course')->where('course_id', $courseId)->paginate(10);
 
         if($lessons->isNotEmpty()){
             return $lessons;
