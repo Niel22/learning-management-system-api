@@ -9,7 +9,7 @@ class FetchSingleContent{
 
     public function execute($lessonId, $id)
     {
-        $content = ModelFinder::findBySlugOrId($id, new Content(), 'lesson_id', $lessonId);
+        $content = ModelFinder::findBySlugOrId($id, new Content(), ['lesson'], 'lesson_id', $lessonId);
 
         if(!empty($content))
         {

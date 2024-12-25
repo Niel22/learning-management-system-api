@@ -12,7 +12,7 @@ class FetchSingleEnrollment
     {
         if (Auth::id() == $studentId) {
 
-            $enrollment = ModelFinder::findBySlugOrId($id, new Enrollment(), 'student_id', $studentId);
+            $enrollment = ModelFinder::findBySlugOrId($id, new Enrollment(), ['course', 'student'], 'student_id', $studentId);
 
             if (!empty($enrollment)) {
                 return $enrollment;

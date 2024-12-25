@@ -3,14 +3,15 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\ContentController;
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\CourseProgressController;
 use App\Http\Controllers\LessonProgressController;
 use App\Http\Controllers\Admin\CourseCategoryController;
-use App\Http\Controllers\Admin\QuizController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -29,4 +30,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('student.course.lesson.progress', LessonProgressController::class)->only('index', 'store');
     Route::apiResource('student.course.progress', CourseProgressController::class)->only('index', 'store');
     Route::apiResource('course.quiz', QuizController::class);
+    Route::apiResource('quiz.question', QuestionController::class);
 });

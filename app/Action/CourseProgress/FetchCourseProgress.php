@@ -10,7 +10,7 @@ class FetchCourseProgress
 {
     public function execute($studentId, $courseId)
     {
-        $progress = CourseProgress::where('student_id', $studentId)
+        $progress = CourseProgress::with('student', 'course')->where('student_id', $studentId)
                                     ->where('course_id', $courseId)
                                     ->first();
         

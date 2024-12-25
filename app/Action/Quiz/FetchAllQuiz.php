@@ -8,7 +8,7 @@ class FetchAllQuiz{
 
     public function execute($courseId)
     {
-        $quiz = Quiz::where('course_Id', $courseId)->get();
+        $quiz = Quiz::with('course')->where('course_Id', $courseId)->paginate(10);
 
         if($quiz->isNotEmpty())
         {

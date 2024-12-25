@@ -9,7 +9,7 @@ class FetchSingleQuiz{
 
     public function execute($courseId, $id)
     {
-        $quiz = ModelFinder::findBySlugOrId($id, new Quiz(), 'course_id', $courseId);
+        $quiz = ModelFinder::findBySlugOrId($id, new Quiz(), ['course'], 'course_id', $courseId);
         
         if(!empty($quiz))
         {

@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Quiz\CreateQuizRequest;
 use App\Http\Requests\Quiz\UpdateQuizRequest;
+use App\Http\Resources\Quiz\QuizCollection;
+use App\Http\Resources\Quiz\QuizResource;
 use App\Trait\ApiResponse;
 
 class QuizController extends Controller
@@ -21,7 +23,7 @@ class QuizController extends Controller
     {
         if($quiz = $action->execute($courseId))
         {
-            return $this->success($quiz);
+            return $this->success(new QuizCollection($quiz));
         }
         return $this->error('No Quiz Found for this course');
     }
@@ -40,7 +42,7 @@ class QuizController extends Controller
     {
         if($quiz = $action->execute($courseId, $id))
         {
-            return $this->success($quiz);
+            return $this->success(new QuizResource($quiz));
         }
         return $this->error('Quiz not found');
     }

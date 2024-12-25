@@ -8,7 +8,7 @@ use App\Models\Course\Lesson;
 class FetchSingleLesson{
 
     public function execute($courseId, $id){
-        $lesson = ModelFinder::findBySlugOrId($id, new Lesson(), 'course_id', $courseId);
+        $lesson = ModelFinder::findBySlugOrId($id, new Lesson(), ['course'], 'course_id', $courseId);
 
         if(!empty($lesson)){
             return $lesson;

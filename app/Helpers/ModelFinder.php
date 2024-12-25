@@ -6,21 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class ModelFinder
 {
-    public static function findBySlugOrId($value, Model $model, $parentCol = null, $parentVal = null, $slug = 'slug')
+    public static function findBySlugOrId($value, Model $model, $relationship = [], $parentCol = null, $parentVal = null, $slug = 'slug')
     {
         if($parentCol != null){
 
             if(is_numeric($value))
             {
-                return $model->where($parentCol, $parentVal)->find($value);
+                return $model->with($relationship)->where($parentCol, $parentVal)->find($value);
             }
-            return $model->where($parentCol, $parentVal)->where($slug, $value)->first();
+            return $model->with($relationship)->where($parentCol, $parentVal)->where($slug, $value)->first();
         }
         
         if(is_numeric($value))
         {
-            return $model->find($value);
+            return $model->with($relationship)->find($value);
         }
-        return $model->where($slug, $value)->first();
+        return $model->with($relationship)->where($slug, $value)->first();
     }
 }
