@@ -2,6 +2,7 @@
 
 namespace App\Models\Course;
 
+use App\Models\Assessment\Quiz;
 use App\Models\User;
 use App\Models\Course\Lesson;
 use App\Models\CourseCategory;
@@ -29,5 +30,10 @@ class Course extends Model
 
     public function lessons(){
         return  $this->hasMany(Lesson::class);
+    }
+
+    public function quiz()
+    {
+        return $this->hasOne(Quiz::class);
     }
 }
