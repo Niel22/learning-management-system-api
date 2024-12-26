@@ -11,18 +11,17 @@ class Lesson extends Model
     protected $fillable = [
         'title',
         'slug',
-        'course_id',
-        'order',
-        'duration'
+        'module_id',
+        'duration',
+        'content_type',
+        'file'
     ];
 
-    public function course(){
-        return $this->belongsTo(Course::class);
+    public function module(){
+        return $this->belongsTo(Module::class);
     }
 
-    public function content(){
-        return $this->hasMany(Content::class);
-    }
+    
 
     public function progress()
     {

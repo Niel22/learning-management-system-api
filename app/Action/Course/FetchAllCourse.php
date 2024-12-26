@@ -9,7 +9,7 @@ use App\Models\Course\Course;
 class FetchAllCourse{
 
     public function execute(){
-        $courses = Course::with('instructor', 'category', 'lessons')->paginate(10);
+        $courses = Course::with('instructor', 'category')->paginate(10);
 
         if($courses->isNotEmpty()){
             return $courses;

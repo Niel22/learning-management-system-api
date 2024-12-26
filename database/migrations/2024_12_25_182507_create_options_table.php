@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Lesson;
+use App\Models\Assessment\Question;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contents', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Lesson::class)->constrained()->onDelete('cascade');
-            $table->string('title');
-            $table->string('slug');
-            $table->string('type')->comment('pdf, videos');
-            $table->string('file');
+            $table->foreignIdFor(Question::class)->constrained()->onDelete('cascade');
+            $table->text('option');
+            $table->boolean('is_correct');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contents');
+        Schema::dropIfExists('options');
     }
 };

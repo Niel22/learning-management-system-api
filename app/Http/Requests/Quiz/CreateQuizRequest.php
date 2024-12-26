@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Quiz;
 
+use App\Models\Assessment\Quiz;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateQuizRequest extends FormRequest
@@ -22,7 +23,17 @@ class CreateQuizRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'String'],
+            'title' => ['required', 'String', 
+                function($atrribute, $value, $fail)
+                {
+                    $value = $this->route('course');
+
+                    if(Quiz::where('course_id', $value)->exists())
+                    {
+                        $fail('This course cannot have more than one quiz');
+                    }
+                }
+            ],
             'description' => ['required', 'min:25']
         ];
     }

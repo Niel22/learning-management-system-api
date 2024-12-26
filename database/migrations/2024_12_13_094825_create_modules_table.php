@@ -1,10 +1,9 @@
 <?php
 
-use App\Models\User;
 use App\Models\Course\Course;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -13,12 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class, 'student_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(Course::class)->constrained()->onDelete('cascade');
-            $table->enum('status', ['pending', 'active', 'completed'])->default('pending');
-            $table->timestamp('enrolled_at');
+            $table->string('title');
+            $table->string('slug');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enrollments');
+        Schema::dropIfExists('modules');
     }
 };

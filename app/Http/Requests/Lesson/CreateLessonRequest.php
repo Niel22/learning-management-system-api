@@ -24,30 +24,14 @@ class CreateLessonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
-            'order' => [
-                'required',
-                'integer',
-                Rule::unique('lessons', 'order')->where(function ($q) {
-                    $q->where('course_id', $this->route('course'));
-                }),
-                function ($attribute, $value, $fail) {
-                    $courseId = $this->route('course');
-
-                    if ($value > 1) {
-
-                        $previousOrder = $value - 1;
-                        $exists = Lesson::where('course_id', $courseId)
-                            ->where('order', $previousOrder)
-                            ->exists();
-
-                        if (!$exists) {
-                            $fail("The lesson with order {$previousOrder} must exist before creating this lesson.");
-                        }
-                    }
-                }
+            'title' => ['required', 'string',
+                Rule::unique('lessons', 'title')->where(function ($q) {
+                    $q->where('module_id', $this->route('module'));
+                })
             ],
-            'duration' => ['required', 'integer']
+            'duration' => ['required', 'integer'],
+            'content_type' => ['required', 'string'],
+            'file' => ['required']
         ];
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Course;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Course\Module;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -16,10 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->foreignIdFor(Course::class)->constrained()->onDelete('cascade');
-            $table->integer('order')->comment('Order by which the lesson goes for eacmple lesson 1 should have order = 1.');
+            $table->foreignIdFor(Module::class)->constrained()->onDelete('cascade');
             $table->integer('duration')->comment('in minute');
-            $table->unique(['course_id', 'order']);
+            $table->string('content_type')->comment('pdf, videos');
+            $table->string('file');
             $table->timestamps();
         });
     }

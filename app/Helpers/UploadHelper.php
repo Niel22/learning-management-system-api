@@ -6,7 +6,7 @@ class UploadHelper{
 
     public function upload($name, $file, $directory){
 
-        $fileName = $name . time() . $file->extension();
+        $fileName = $name . time() . '.' .$file->extension();
 
         $file->storeAs($directory, $fileName, 'public');
 

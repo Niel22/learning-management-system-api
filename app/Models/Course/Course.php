@@ -4,7 +4,6 @@ namespace App\Models\Course;
 
 use App\Models\Assessment\Quiz;
 use App\Models\User;
-use App\Models\Course\Lesson;
 use App\Models\CourseCategory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,9 +26,10 @@ class Course extends Model
     {
         return $this->belongsTo(CourseCategory::class, 'course_category_id', 'id');
     }
+    
 
-    public function lessons(){
-        return  $this->hasMany(Lesson::class);
+    public function module(){
+        return  $this->hasMany(Module::class);
     }
 
     public function quiz()

@@ -19,9 +19,9 @@ class LessonResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
-            'order' => 'Lesson '. $this->order,
             'duration' => $this->duration . ' Minutes',
-            'course' => $this->course->title,
+            'module' => $this->module->title,
+            'file' => url($this->file)
         ];
     }
 }

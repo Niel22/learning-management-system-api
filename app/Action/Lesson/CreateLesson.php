@@ -3,18 +3,27 @@
 namespace App\Action\Lesson;
 
 use Illuminate\Support\Str;
-use App\Models\Course\Course;
+use App\Helpers\UploadHelper;
+use App\Models\Course\Module;
 
 class CreateLesson{
 
-    public function execute($courseId, $request){
+    protected $action;
 
-        $request['slug'] = Str::slug($request['title']);
-        $course = Course::find($courseId);
+    public function __construct(UploadHelper $action)
+    {
+        $this->action = $action;
+    }
 
-        if(!empty($course)){
+    public function execute($moduleId, $request){
 
-            $lesson = $course->lessons()->create($request);
+        $module = Module::find($moduleId);
+        
+        if(!empty($module)){
+            
+            $request['slug'] = Str::slug($request['title']);
+            $request['file'] = $this->action->upload($request['slug'], $request['file'], 'module_content/');
+            $lesson = $module->lesson()->create($request);
             
             if($lesson){
                 return true;

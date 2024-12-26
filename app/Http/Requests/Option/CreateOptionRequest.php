@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Lesson;
+namespace App\Http\Requests\Option;
 
-use App\Models\Course\Lesson;
+use App\Models\Assessment\Option;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateLessonRequest extends FormRequest
+class CreateOptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,16 @@ class UpdateLessonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['nullable', 'string',
-                Rule::unique('lessons', 'title')->where(function ($q) {
-                    $q->where('module_id', $this->route('module'));
-                })
+            'options' => ['required', 'array', 'size:4'], 
+            'options.*.option' => [
+                'required',
+                'string',
+                Rule::unique('options', 'option')->where(function ($q) {
+                    $q->where('question_id', $this->route('question'));
+                }),
             ],
-            'duration' => ['nullable', 'integer'],
-            'content_type' => ['nullable', 'string'],
-            'file' => ['nullable']
+            'options.*.is_correct' => ['required', 'boolean'],
         ];
+        
     }
 }

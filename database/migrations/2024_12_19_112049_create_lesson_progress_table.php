@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Course;
-use App\Models\Lesson;
 use App\Models\User;
+use App\Models\Course\Course;
+use App\Models\Course\Lesson;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
