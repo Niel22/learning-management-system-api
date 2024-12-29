@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Trait\ApiResponse;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Action\Enrollment\CreateEnrollment;
 use App\Action\Enrollment\DeleteEnrollment;
@@ -18,9 +19,9 @@ class EnrollmentController extends Controller
 {
     use ApiResponse;
 
-    public function index($studentId, FetchAllEnrollment $action)
+    public function index(FetchAllEnrollment $action)
     {
-        if($enrollment = $action->execute($studentId, $studentId))
+        if($enrollment = $action->execute())
         {
             return $this->success(new EnrollmentCollection($enrollment));
         }
@@ -38,9 +39,9 @@ class EnrollmentController extends Controller
         return $this->error('Cannot Enroll student');
     }
 
-    public function update($studentId, $id, CompleteEnrollmentRequest $request, UpdateEnrollment $action)
+    public function update($id, CompleteEnrollmentRequest $request, UpdateEnrollment $action)
     {
-        if($action->execute($studentId, $id, $request->all()))
+        if($action->execute($id, $request->all()))
         {
             return $this->success([], 'Enrolled Course Completed');
         }
@@ -48,9 +49,9 @@ class EnrollmentController extends Controller
         return $this->error('Enrolled course not found');
     }
 
-    public function show($studentId, $id, FetchSingleEnrollment $action)
+    public function show($id, FetchSingleEnrollment $action)
     {
-        if($enrollment = $action->execute($studentId, $id))
+        if($enrollment = $action->execute($id))
         {
             return $this->success(new EnrollmentResource($enrollment));
         }
@@ -58,9 +59,9 @@ class EnrollmentController extends Controller
         return $this->error('Enrollment Not Found');
     }
 
-    public function destroy($studentId, $id, DeleteEnrollment $action)
+    public function destroy($id, DeleteEnrollment $action)
     {
-        if($action->execute($studentId, $id))
+        if($action->execute($id))
         {
             return $this->success([], 'Enrollment Deleted');
         }

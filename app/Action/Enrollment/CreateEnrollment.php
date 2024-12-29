@@ -11,20 +11,16 @@ class CreateEnrollment
 
     public function execute($request)
     {
-        
-        if ($request['student_id'] == Auth::id()) {
-            
-            $request['enrolled_at'] = now();
-            $user = User::find($request['student_id']);
+        $request['enrolled_at'] = now();
+        $user = User::find($request['student_id']);
 
-            if (!empty($user)) {
+        if (!empty($user)) {
 
-                $enrollment = $user->enrollment()->create($request);
-                event(new CourseEnrolled($enrollment));
+            $enrollment = $user->enrollment()->create($request);
+            event(new CourseEnrolled($enrollment));
 
-                if ($enrollment) {
-                    return true;
-                }
+            if ($enrollment) {
+                return true;
             }
         }
         return false;
