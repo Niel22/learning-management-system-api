@@ -2,6 +2,7 @@
 
 namespace App\Action\Auth;
 
+use App\Events\UserLoggedIn;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,8 @@ class Login{
             $user = Auth::user();
 
             $token = $user->createToken($user['email'])->plainTextToken;
+
+            event(new UserLoggedIn($user));
 
             return [
                 'user' => $user,

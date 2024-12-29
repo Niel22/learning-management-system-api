@@ -52,6 +52,11 @@ return [
             'after_commit' => false,
         ],
 
+        'smtp' => [
+            'driver' => 'smtp',
+            'retry_after' => 90, 
+        ],
+
         'sqs' => [
             'driver' => 'sqs',
             'key' => env('AWS_ACCESS_KEY_ID'),
