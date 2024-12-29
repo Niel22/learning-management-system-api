@@ -28,9 +28,9 @@ class EnrollmentController extends Controller
         return $this->error('No enrollement Found');
     }
 
-    public function store($studentId, EnrollmentRequest $request, CreateEnrollment $action)
+    public function store(EnrollmentRequest $request, CreateEnrollment $action)
     {
-        if($action->execute($studentId, $request->all()))
+        if($action->execute($request->all()))
         {
             return $this->success([], 'Student Enrolled');
         }

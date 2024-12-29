@@ -24,6 +24,7 @@ class EnrollmentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'student_id' => ['required', 'exists:users,id'],
             'course_id' => ['required', 'exists:courses,id',
                 Rule::unique('enrollments', 'course_id')->where(function($q){
                     $q->where('course_id', Request('course_id'));
