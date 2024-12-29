@@ -19,11 +19,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'create']);
+Route::post('login', [AuthController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function(){
-
+    Route::post('logout', [AuthController::class, 'destroy']);
+    
     Route::apiResource('course-category', CourseCategoryController::class);
     Route::apiResource('course', CourseController::class);
     Route::apiResource('course.module', ModuleController::class);
