@@ -7,14 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DeleteEnrollment
 {
-    public function execute($id)
+    public function execute($studentId, $id)
     {
-        $enrollment = Enrollment::find($id);
+        if (Auth::id() == $studentId) {
+            $enrollment = Enrollment::find($id);
 
-        if (!empty($enrollment)) {
-
-            if ($enrollment->student_id == Auth::id()) {
-
+            if (!empty($enrollment)) {
                 return $enrollment->delete();
             }
         }

@@ -7,14 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 class FetchAllEnrollment
 {
-    public function execute()
+    public function execute($studentId)
     {
-        $enrollment = Enrollment::with('course', 'student')->where('student_id', Auth::id())->paginate();
+        if (Auth::id() == $studentId) {
+            $enrollment = Enrollment::with('course', 'student')->where('student_id', $studentId)->paginate();
 
-        if ($enrollment->isNotEmpty()) {
-            return $enrollment;
+            if ($enrollment->isNotEmpty()) {
+                return $enrollment;
+            }
         }
-
         return false;
     }
 }

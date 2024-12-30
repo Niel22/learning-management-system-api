@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Trait\ApiResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Action\Enrollment\CreateEnrollment;
 use App\Action\Enrollment\DeleteEnrollment;
@@ -19,9 +18,9 @@ class EnrollmentController extends Controller
 {
     use ApiResponse;
 
-    public function index(FetchAllEnrollment $action)
+    public function index($studentId, FetchAllEnrollment $action)
     {
-        if($enrollment = $action->execute())
+        if($enrollment = $action->execute($studentId, $studentId))
         {
             return $this->success(new EnrollmentCollection($enrollment));
         }
@@ -29,9 +28,9 @@ class EnrollmentController extends Controller
         return $this->error('No enrollement Found');
     }
 
-    public function store(EnrollmentRequest $request, CreateEnrollment $action)
+    public function store($studentId, EnrollmentRequest $request, CreateEnrollment $action)
     {
-        if($action->execute($request->all()))
+        if($action->execute($studentId, $request->all()))
         {
             return $this->success([], 'Student Enrolled');
         }
@@ -39,9 +38,9 @@ class EnrollmentController extends Controller
         return $this->error('Cannot Enroll student');
     }
 
-    public function update($id, CompleteEnrollmentRequest $request, UpdateEnrollment $action)
+    public function update($studentId, $id, CompleteEnrollmentRequest $request, UpdateEnrollment $action)
     {
-        if($action->execute($id, $request->all()))
+        if($action->execute($studentId, $id, $request->all()))
         {
             return $this->success([], 'Enrolled Course Completed');
         }
@@ -49,9 +48,9 @@ class EnrollmentController extends Controller
         return $this->error('Enrolled course not found');
     }
 
-    public function show($id, FetchSingleEnrollment $action)
+    public function show($studentId, $id, FetchSingleEnrollment $action)
     {
-        if($enrollment = $action->execute($id))
+        if($enrollment = $action->execute($studentId, $id))
         {
             return $this->success(new EnrollmentResource($enrollment));
         }
@@ -59,9 +58,9 @@ class EnrollmentController extends Controller
         return $this->error('Enrollment Not Found');
     }
 
-    public function destroy($id, DeleteEnrollment $action)
+    public function destroy($studentId, $id, DeleteEnrollment $action)
     {
-        if($action->execute($id))
+        if($action->execute($studentId, $id))
         {
             return $this->success([], 'Enrollment Deleted');
         }
