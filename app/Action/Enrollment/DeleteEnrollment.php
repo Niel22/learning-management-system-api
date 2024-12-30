@@ -11,9 +11,11 @@ class DeleteEnrollment
     {
         if (Auth::id() == $studentId) {
             $enrollment = Enrollment::find($id);
+            if (Auth::id() == $enrollment->student_id) {
 
-            if (!empty($enrollment)) {
-                return $enrollment->delete();
+                if (!empty($enrollment)) {
+                    return $enrollment->delete();
+                }
             }
         }
 

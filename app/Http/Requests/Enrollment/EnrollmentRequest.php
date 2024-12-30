@@ -26,7 +26,7 @@ class EnrollmentRequest extends FormRequest
         return [
             'course_id' => ['required', 'exists:courses,id',
                 Rule::unique('enrollments', 'course_id')->where(function($q){
-                    $q->where('course_id', Request('course_id'));
+                    $q->where('student_id', $this->route('student'));
                 })
             ],
             'status' => ['nullable', 'string'],
