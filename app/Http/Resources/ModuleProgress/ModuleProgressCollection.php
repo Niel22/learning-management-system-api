@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\LessonProgress;
+namespace App\Http\Resources\ModuleProgress;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class LessonProgressCollection extends ResourceCollection
+class ModuleProgressCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.

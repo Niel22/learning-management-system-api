@@ -4,15 +4,15 @@ namespace App\Models\Progress;
 
 use App\Models\User;
 use App\Models\Course\Course;
-use App\Models\Course\Lesson;
+use App\Models\Course\Module;
 use Illuminate\Database\Eloquent\Model;
 
-class LessonProgress extends Model
+class ModuleProgress extends Model
 {
     protected $fillable = [
         'student_id',
         'course_id',
-        'lesson_id',
+        'module_id',
         'progress',
         'is_completed'
     ];
@@ -27,8 +27,8 @@ class LessonProgress extends Model
         return $this->belongsTo(User::class, 'student_id');
     }
 
-    public function lesson()
+    public function module()
     {
-        return $this->belongsTo(Lesson::class, 'lesson_id');
+        return $this->belongsTo(Module::class, 'module_id');
     }
 }

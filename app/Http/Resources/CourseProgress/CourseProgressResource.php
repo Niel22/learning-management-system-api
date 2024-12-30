@@ -17,8 +17,8 @@ class CourseProgressResource extends JsonResource
         return [
             'Student' => $this->student->name,
             'Course' => $this->course->title,
-            'progress' => ($this->progress/$this->course->lessons->count())* 100 . '%',
-            'Completed' => $this->is_completed ? True : False,
+            'progress' => ($this->progress/$this->course->module->count())* 100 . '%',
+            'Completed' => $this->progress == $this->course->module->count() ? True : False,
         ];
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\LessonProgress;
+namespace App\Http\Resources\ModuleProgress;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LessonProgressResource extends JsonResource
+class ModuleProgressResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,10 @@ class LessonProgressResource extends JsonResource
         return [
             'id' => $this->id,
             'course' => $this->course->title,
-            'lesson' => $this->lesson->title,
+            'module' => $this->module->title,
             'student' => $this->student->name,
-            'progress' => ($this->progress/$this->lesson->content->count()) * 100 . '%'
+            'progress' => ($this->progress/$this->module->lesson->count()) * 100 . '%',
+            'Completed' => $this->progress == $this->module->lesson->count() ? True : False
         ];
     }
 }

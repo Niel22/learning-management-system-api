@@ -2,7 +2,7 @@
 
 use App\Models\User;
 use App\Models\Course\Course;
-use App\Models\Course\Lesson;
+use App\Models\Course\Module;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -14,13 +14,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lesson_progress', function (Blueprint $table) {
+        Schema::create('module_progress', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, 'student_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(Course::class)->constrained()->onDelete('cascade');
-            $table->foreignIdFor(Lesson::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Module::class)->constrained()->onDelete('cascade');
             $table->integer('progress')->default(0);
-            $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lesson_progress');
+        Schema::dropIfExists('module_progress');
     }
 };

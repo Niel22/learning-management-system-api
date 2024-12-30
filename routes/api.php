@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\CourseProgressController;
-use App\Http\Controllers\LessonProgressController;
+use App\Http\Controllers\ModuleProgressController;
 use App\Http\Controllers\Admin\CourseCategoryController;
 
 Route::get('/user', function (Request $request) {
@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('course.module', ModuleController::class);
     Route::apiResource('module.lesson', LessonController::class);
     Route::apiResource('student.enrollment', EnrollmentController::class);
-    Route::apiResource('student.course.lesson.progress', LessonProgressController::class)->only('index', 'store');
+    Route::apiResource('student.course.module.progress', ModuleProgressController::class)->only('index', 'store');
     Route::apiResource('student.course.progress', CourseProgressController::class)->only('index', 'store');
     Route::apiResource('course.quiz', QuizController::class);
     Route::apiResource('quiz.question', QuestionController::class);
