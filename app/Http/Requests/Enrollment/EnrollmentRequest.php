@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Enrollment;
 
 use GuzzleHttp\Psr7\Request;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
 class EnrollmentRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class EnrollmentRequest extends FormRequest
         return [
             'course_id' => ['required', 'exists:courses,id',
                 Rule::unique('enrollments', 'course_id')->where(function($q){
-                    $q->where('student_id', $this->route('student'));
+                    $q->where('student_id', Auth::id());
                 })
             ],
             'status' => ['nullable', 'string'],
