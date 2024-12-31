@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Content;
+namespace App\Http\Resources\Module;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ContentResource extends JsonResource
+class ModuleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,12 +15,11 @@ class ContentResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'lesson title' => $this->lesson->title,
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
-            'type' => $this->type,
-            'file' => url($this->file), 
+            'description' => $this->description,
+            'course' => $this->course->title
         ];
     }
 }

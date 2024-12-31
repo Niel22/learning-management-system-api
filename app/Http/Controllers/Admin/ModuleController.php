@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Trait\ApiResponse;
 use App\Action\Module\CreateModule;
 use App\Action\Module\DeleteModule;
-use App\Action\Module\FetchAllModule;
-use App\Action\Module\FetchSingleModule;
 use App\Action\Module\UpdateModule;
 use App\Http\Controllers\Controller;
+use App\Action\Module\FetchAllModule;
+use App\Action\Module\FetchSingleModule;
+use App\Http\Resources\Module\ModuleResource;
+use App\Http\Resources\Module\ModuleCollection;
 use App\Http\Requests\Module\CreateModuleRequest;
 use App\Http\Requests\Module\UpdateModuleRequest;
-use App\Trait\ApiResponse;
 
 class ModuleController extends Controller
 {
@@ -20,7 +22,7 @@ class ModuleController extends Controller
     {
         if($module = $action->execute($courseId))
         {
-            return $this->success($module);        
+            return $this->success(new ModuleCollection($module));        
         }
         return $this->error('No module found');
     }
@@ -38,7 +40,7 @@ class ModuleController extends Controller
     {
         if($module = $action->execute($courseId, $id))
         {
-            return $this->success($module);
+            return $this->success(new ModuleResource($module));
         }
         return $this->error('Module not found');
     }

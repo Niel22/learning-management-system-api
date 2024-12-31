@@ -9,7 +9,7 @@ class FetchAllModule{
 
     public function execute($courseId)
     {
-        $module = Module::with('course')->where('course_id', $courseId)->get();
+        $module = Module::with('course')->where('course_id', $courseId)->paginate(10);
 
         if($module->isNotEmpty())
         {

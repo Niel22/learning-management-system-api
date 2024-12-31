@@ -12,7 +12,6 @@ class FetchModuleProgress
     public function execute($moduleId)
     {
         $progress = ModuleProgress::with('student', 'course', 'module')->where('student_id', Auth::id())
-                                    ->where('module_id', $moduleId)
                                     ->paginate(10);
                                     
         if($progress->isNotEmpty())

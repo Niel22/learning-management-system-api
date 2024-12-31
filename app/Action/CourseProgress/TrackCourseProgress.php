@@ -2,6 +2,7 @@
 
 namespace App\Action\CourseProgress;
 
+use App\Events\CourseCompleted;
 use App\Models\Course\Course;
 use App\Models\Course\Lesson;
 use App\Models\Course\Module;
@@ -22,8 +23,9 @@ class TrackCourseProgress
             $modules = Module::where('course_id', $courseId)->get();
             $count = 0;
             foreach($modules as $module){
+                $lesson = Lesson::where('module_id', $module->id)->count();
                 $count += ModuleProgress::where('module_id', $module->id)
-                                        ->where('progress', $modules->count())
+                                        ->where('progress', $lesson)
                                         ->count();
             }
 
@@ -33,8 +35,14 @@ class TrackCourseProgress
 
                 $progress->save();
 
+                if($progress->progress == $modules->count())
+                {
+                    event(new CourseCompleted($progress));
+                }
+
                 return true;
             }
+
 
         return false;
     }

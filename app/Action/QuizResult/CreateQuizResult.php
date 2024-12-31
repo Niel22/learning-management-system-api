@@ -2,6 +2,7 @@
 
 namespace App\Action\QuizResult;
 
+use App\Events\QuizSubmitted;
 use App\Models\Assessment\Option;
 use App\Models\Assessment\Quiz;
 use App\Models\Assessment\QuizResult;
@@ -35,6 +36,8 @@ class CreateQuizResult
                 }
                 
             }
+
+            event(new QuizSubmitted($result));
 
             return true;
 
