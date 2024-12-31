@@ -7,19 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 class UpdateEnrollment
 {
-    public function execute($studentId, $id, $request)
+    public function execute($id, $request)
     {
-        if (Auth::id() == $studentId) {
-            $enrollment = Enrollment::find($id);
+        $enrollment = Enrollment::where('student_id', Auth::id())->find($id);
 
-            if (Auth::id() == $enrollment->student_id) {
 
-                if (!empty($enrollment)) {
-                    return $enrollment->update([
-                        'status' => $request['status']
-                    ]);
-                }
-            }
+        if (!empty($enrollment)) {
+            return $enrollment->update([
+                'status' => $request['status']
+            ]);
         }
 
         return false;

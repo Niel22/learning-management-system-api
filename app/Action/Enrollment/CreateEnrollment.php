@@ -8,13 +8,12 @@ use Illuminate\Support\Facades\Auth;
 class CreateEnrollment
 {
 
-    public function execute($studentId, $request)
+    public function execute($request)
     {
         
-        if ($studentId == Auth::id()) {
             
             $request['enrolled_at'] = now();
-            $user = User::find($studentId);
+            $user = User::find(Auth::id());
 
             if (!empty($user)) {
                 $enrollment = $user->enrollment()->create($request);
@@ -23,7 +22,6 @@ class CreateEnrollment
                     return true;
                 }
             }
-        }
         return false;
     }
 }

@@ -8,15 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class FetchSingleEnrollment
 {
-    public function execute($studentId, $id)
+    public function execute($id)
     {
-        if (Auth::id() == $studentId) {
 
-            $enrollment = ModelFinder::findBySlugOrId($id, new Enrollment(), ['course', 'student'], 'student_id', $studentId);
+        $enrollment = ModelFinder::findBySlugOrId($id, new Enrollment(), ['course', 'student'], 'student_id', Auth::id());
 
-            if (!empty($enrollment)) {
-                return $enrollment;
-            }
+        if (!empty($enrollment)) {
+            return $enrollment;
         }
 
         return false;

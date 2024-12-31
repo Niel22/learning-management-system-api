@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('course', CourseController::class);
     Route::apiResource('course.module', ModuleController::class);
     Route::apiResource('module.lesson', LessonController::class);
-    Route::apiResource('student.enrollment', EnrollmentController::class);
+    Route::apiResource('enrollment', EnrollmentController::class);
     Route::apiResource('module.progress', ModuleProgressController::class)->only('index', 'store', 'show');
     Route::apiResource('course.progress', CourseProgressController::class)->only('index', 'store');
     Route::apiResource('course.quiz', QuizController::class);
