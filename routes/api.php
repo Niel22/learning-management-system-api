@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\CourseProgressController;
 use App\Http\Controllers\ModuleProgressController;
 use App\Http\Controllers\Admin\CourseCategoryController;
+use App\Http\Controllers\QuizResultController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -35,7 +36,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('course.quiz', QuizController::class);
     Route::apiResource('quiz.question', QuestionController::class);
     Route::apiResource('question.option', OptionController::class);
-
+    Route::apiResource('quiz.quiz_result', QuizResultController::class);
 });
 
 
