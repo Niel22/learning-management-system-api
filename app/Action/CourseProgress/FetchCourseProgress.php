@@ -2,15 +2,17 @@
 
 namespace App\Action\CourseProgress;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Progress\CourseProgress;
 
 
 
 class FetchCourseProgress
 {
-    public function execute($studentId, $courseId)
+    public function execute($courseId)
     {
-        $progress = CourseProgress::with('student', 'course')->where('student_id', $studentId)
+        $progress = CourseProgress::with('student', 'course')
+                                    ->where('student_id', Auth::id())
                                     ->where('course_id', $courseId)
                                     ->first();
         

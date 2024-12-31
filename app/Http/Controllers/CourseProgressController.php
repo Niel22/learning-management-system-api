@@ -7,15 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Action\CourseProgress\FetchCourseProgress;
 use App\Action\CourseProgress\TrackCourseProgress;
+use App\Http\Requests\Progress\CourseProgressRequest;
 use App\Http\Resources\CourseProgress\CourseProgressResource;
 
 class CourseProgressController extends Controller
 {
     use ApiResponse;
 
-    public function index($studentId, $courseId, FetchCourseProgress $action)
+    public function index($courseId, FetchCourseProgress $action)
     {
-        if($progress = $action->execute($studentId, $courseId))
+        if($progress = $action->execute($courseId))
         {
             return $this->success(new CourseProgressResource($progress));
         }
@@ -23,9 +24,9 @@ class CourseProgressController extends Controller
         return $this->error('You dont have any progress on this course yet');
     }
 
-    public function store($studentId, $courseId, TrackCourseProgress $action)
+    public function store($courseId, TrackCourseProgress $action)
     {
-        if($action->execute($studentId, $courseId))
+        if($action->execute($courseId))
         {
             return $this->success([], 'Progress Updated');
         }

@@ -11,13 +11,11 @@ use App\Models\Progress\ModuleProgress;
 
 class TrackCourseProgress
 {
-    public function execute($studentId, $courseId)
+    public function execute($courseId)
     {
         
-        if(Self::exist($studentId, $courseId))
-        {
             $progress = CourseProgress::firstOrCreate([
-                'student_id' => $studentId,
+                'student_id' => Auth::id(),
                 'course_id' => $courseId
             ]);
 
@@ -37,18 +35,8 @@ class TrackCourseProgress
 
                 return true;
             }
-        }
 
         return false;
     }
 
-    protected function exist($studentId, $courseId)
-    {
-        if($studentId == Auth::id() && Course::where('id', $courseId)->exists())
-        {
-            return true;
-        }
-
-        return false;
-    }
 }

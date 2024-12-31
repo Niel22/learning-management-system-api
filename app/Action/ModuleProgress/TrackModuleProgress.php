@@ -11,13 +11,12 @@ use App\Models\Course\Module;
 
 class TrackModuleProgress
 {
-    public function execute($studentId, $courseId, $moduleId)
+    public function execute($moduleId, $request)
     {
-        if(Self::exist($studentId, $courseId, $moduleId))
-        {
+       
             $progress = ModuleProgress::firstOrCreate([
-                'student_id' => $studentId,
-                'course_id' => $courseId,
+                'student_id' => Auth::id(),
+                'course_id' => $request['course_id'],
                 'module_id' => $moduleId,
             ]);
 
@@ -31,24 +30,13 @@ class TrackModuleProgress
 
 
                 $action = new TrackCourseProgress();
-                $action->execute($studentId, $courseId);
+                $action->execute($request['course_id']);
 
                 
+                return true;
             } 
-            return true;
 
             
-        }
-
-        return false;
-    }
-
-    protected function exist($studentId, $courseId, $module_id)
-    {
-        if($studentId == Auth::id() && Course::where('id', $courseId)->exists() && Module::where('id', $module_id)->exists())
-        {
-            return true;
-        }
 
         return false;
     }

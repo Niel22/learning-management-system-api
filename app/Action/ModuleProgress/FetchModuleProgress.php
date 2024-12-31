@@ -2,20 +2,20 @@
 
 namespace App\Action\ModuleProgress;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Progress\ModuleProgress;
 
 
 
 class FetchModuleProgress
 {
-    public function execute($studentId, $courseId, $moduleId)
+    public function execute($moduleId)
     {
-        $progress = ModuleProgress::with('student', 'course', 'module')->where('student_id', $studentId)
-                                    ->where('course_id', $courseId)
+        $progress = ModuleProgress::with('student', 'course', 'module')->where('student_id', Auth::id())
                                     ->where('module_id', $moduleId)
-                                    ->first();
+                                    ->paginate(10);
                                     
-        if(!empty($progress))
+        if($progress->isNotEmpty())
         {
             return $progress;
         }
